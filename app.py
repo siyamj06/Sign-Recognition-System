@@ -460,7 +460,7 @@ def main():
 
             with col1:
                 st.subheader("📷 Original Image")
-                st.image(image_rgb, use_container_width=True)
+                st.image(image_rgb, width="stretch")
 
             with col2:
                 st.subheader("🔍 Recognition Result")
@@ -484,7 +484,7 @@ def main():
                     annotated = image_rgb.copy()
                     annotated = draw_hands(annotated, result.hand_landmarks)
 
-                    st.image(annotated, use_container_width=True)
+                    st.image(annotated, width="stretch")
 
                     # Extract features (handles 1 or 2 hands)
                     features = extract_landmarks(result.hand_landmarks)
@@ -549,10 +549,10 @@ def main():
         st.caption("Works in browser and Streamlit Cloud using your device camera.")
         control_col1, control_col2 = st.columns(2)
         with control_col1:
-            if st.button("📷 Capture Image", use_container_width=True):
+            if st.button("📷 Capture Image", width="stretch"):
                 st.session_state.webcam_enabled = True
         with control_col2:
-            if st.button("⏹️ Reset", use_container_width=True):
+            if st.button("⏹️ Reset", width="stretch"):
                 st.session_state.webcam_enabled = False
 
         if not st.session_state.webcam_enabled:
@@ -584,7 +584,7 @@ def main():
 
             with col1:
                 st.subheader("📷 Captured Frame")
-                st.image(frame_rgb, use_container_width=True)
+                st.image(frame_rgb, width="stretch")
 
             with col2:
                 st.subheader("🔍 Result")
@@ -598,7 +598,7 @@ def main():
                 if result.hand_landmarks:
                     annotated = frame_rgb.copy()
                     annotated = draw_hands(annotated, result.hand_landmarks)
-                    st.image(annotated, use_container_width=True)
+                    st.image(annotated, width="stretch")
 
                     features = extract_landmarks(result.hand_landmarks)
                     prediction, confidence, _ = predict_gesture(features, model_data)
@@ -617,7 +617,7 @@ def main():
         st.image(
             "https://static.vikaspedia.in/mediastorage/image/aphabets_and_numbers_in_isl.png",
             caption="Indian Sign Language Character Chart",
-            use_container_width=True
+            width="stretch"
         )
         
         st.markdown("""
@@ -665,7 +665,7 @@ def main():
             st.subheader("🔬 Model Comparison")
             comp_path = os.path.join(plots_dir, "model_comparison.png")
             if os.path.exists(comp_path):
-                st.image(comp_path, use_container_width=True)
+                st.image(comp_path, width="stretch")
                 st.caption("Comparison of different ML algorithms on test data")
             
             st.divider()
@@ -674,7 +674,7 @@ def main():
             st.subheader("🎯 Confusion Matrix")
             cm_path = os.path.join(plots_dir, "confusion_matrix.png")
             if os.path.exists(cm_path):
-                st.image(cm_path, use_container_width=True)
+                st.image(cm_path, width="stretch")
                 st.caption("Shows which letters are sometimes confused by the model")
             
             st.divider()
@@ -683,7 +683,7 @@ def main():
             st.subheader("📈 Dataset Distribution")
             cd_path = os.path.join(plots_dir, "class_distribution.png")
             if os.path.exists(cd_path):
-                st.image(cd_path, use_container_width=True)
+                st.image(cd_path, width="stretch")
                 st.caption("Number of training samples per gesture class")
         else:
             st.warning("⚠️ Plots not found. Train the model to generate performance charts.")
