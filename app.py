@@ -46,7 +46,12 @@ def load_landmarker():
         num_hands=2,  
         min_hand_detection_confidence=0.5
     )
-    return HandLandmarker.create_from_options(options)
+    try:
+        return HandLandmarker.create_from_options(options)
+    except OSError as exc:
+        st.error("❌ MediaPipe hand landmarker could not load on this environment.")
+        st.caption(f"Native library error: {exc}")
+        return None
 
 
 def extract_landmarks(hands_list):
